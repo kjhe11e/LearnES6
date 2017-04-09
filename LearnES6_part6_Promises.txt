@@ -1,0 +1,46 @@
+//'use strict' introduced in ES5, restricts syntax used, allows javascript to fail less silently
+
+let myProm = new Promise((resolve, reject) => {
+	
+	setTimeout(() => {
+		resolve('good to go');
+	},1000);
+});
+
+// promises can no longer change state after rejected
+
+
+myProm.then((res) => {
+	console.log(res);
+})
+.catch((err) => {
+	console.log(err);
+});
+
+
+let prom2 = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('Promise 2 - the promising');
+	},1500);
+});
+
+Promise.all([myProm,prom2])
+	.then((data) => {
+		console.log(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
+
+
+// fetch API, browser API = new way to make http requests:
+
+fetch('http://api.someURL/asdf')
+	.then((res) => {
+		res.json().then((data) => {
+			console.log(data);
+		});
+	})
+	.catch((err) => {
+		console.log(err);
+	});
