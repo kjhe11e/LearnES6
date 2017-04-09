@@ -1,0 +1,52 @@
+similar to how 'this' is lexically scoped, 'arguments' keyword is also lexically scoped
+
+let sum = function() {
+	console.log(arguments);
+};
+
+sum(2,3,4,5);
+
+
+check out array's reduce method. 
+
+let sum = function() {
+	return Array.prototype.reduce.call(arguments,(prev, curr) => {
+		return prev + curr;
+	});
+};
+console.log( sum(2,3,4,5) );
+
+
+Instead, can do:
+---------------
+let sum = function(...args) {		//...means rest parameter
+	console.log(args);
+};
+console.log( sum(2,3,4,5) );
+
+Then can do:
+let sum = function(...args) {
+	return args.reduce((prev,curr) => prev + curr);
+};
+console.log( sum(2,3,4,5) ); //returns 14
+
+let multiply = (multiplier, ...numbers) {
+	//console.log(multiplier, numbers)
+	return numbers.map((n) => {
+		return multiplier * n
+	});
+};
+let result = multiply(2,7,4,5);
+console.log(result);	// returns 14,8,10
+
+let nums = [4,6,3,8];
+let max = Math.max.apply(null, nums);
+console.log(max);
+// instead, can use spread operator:
+let nums = [4,6,3,8];
+let max = Math.max(...nums);
+console.log(max);
+
+let addMoreNums = [3,4,6,...nums,7,2];
+console.log(addMoreNums);	// outputs [3,4,6,4,6,3,8,7,2]
+
