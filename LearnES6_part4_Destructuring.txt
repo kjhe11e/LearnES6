@@ -1,0 +1,30 @@
+let person = {
+	name: 'Kyle',
+	age: 100,
+	location: 'Seattle'
+};
+
+person.age;	//100
+person["age"];	//100
+
+let { age: personAge } = person;	// age = key to grab value from, personAge = new variable to store value in, and person = object we are extracting the values from
+
+console.log(personAge);
+
+let { age, location: currentLocation} = person;
+console.log(age, currentLocation);	// outputs 100, "Seattle"
+
+// computed properties:
+(new feature for object literals)
+
+let key = "age";	// what happens if multiple objects have "age", i.e. person->age and animal->age
+let { [age] : keyAge } = person;
+console.log(keyAge);	//outputs 100
+
+another example:
+
+let numbers = [1,2,3,4];
+let [first,second] = numbers;
+console.log(first, second);	//outputs 1,2
+
+// can use rest params in destructuring statement
