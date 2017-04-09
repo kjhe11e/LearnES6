@@ -1,0 +1,22 @@
+back-tick marks `` allow couple things:
+* multi-line strings
+* better concatenation, i.e.:
+let first = "Kyle";
+let last = "Helle";
+console.log(`Name is ${first} ${last}`);
+output: "Name is Kyle Helle"
+
+or can do:
+---------------
+let person = {
+	first: 'Kyle',
+	last: 'Helle',
+	sayName() {
+		return `My name is ${this.first} ${this.last}`;
+	}
+}
+let name = person.sayName();
+console.log(name);
+-----
+output: "My name is Kyle Helle"
+

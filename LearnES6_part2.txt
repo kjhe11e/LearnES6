@@ -1,0 +1,90 @@
+let add = (a,b) => {
+	return a + b;
+}
+
+console.log( add(2,3) )
+---
+outputs: 5
+---
+
+can eliminate {} to just have:
+let add = (a,b) => return a + b;
+
+array 'map' function returns new array with operations performed on each elem in array
+
+let nums = [2,3,4,5];
+let doubled = nums.map(function(n) {
+	return n + 2;
+});
+console.log(doubled);
+---
+outputs: [4,5,6,7]
+---
+
+similar to above, can elinimate {} to have:
+
+let numbers = [2,3,4];
+let doubled = numbers.map(n => n + 2);
+console.log(doubled); //similar result
+
+let person = {
+
+	name: 'Kyle',
+	sayName: function() {
+		console.log(`hey I'm ${this.name}`);
+	}
+}
+person.sayName();
+
+=>'s have lexical scope, meaning scope of 'this' is bound to whatever it was bound to before, i.e. not the object but parent scope 
+
+for example, if we do:
+let person = {
+	name: 'Kyle',
+	sayName: () => {
+		console.log(`Hey I'm ${this.name}`);
+	}
+}
+person.sayName();
+---
+we get undefined. TypeError: Cannot read property 'name' of undefined
+---
+
+HOWEVER, we CAN do:
+let person = {
+	name: 'Kyle',
+	sayName() {
+		console.log(`hi i'm ${this.name}`);
+	}
+}
+person.sayName(); //outputs "hi i'm Kyle", i.e. same as if we did sayName: function() {...}
+
+
+Next example:
+
+let person = {
+	name: 'Kyle',
+	products: ['Coinme-ATM', 'Coinme-Wallet', 'GameCoin'],
+	showProducts: function() {
+		
+		this.products.forEach(function(product) {
+			console.log(`${this.name} sells ${product}`)
+		});
+	}
+}
+
+PROBLEM: in above example, the two 'this' keywords are different... ${this.name} is undefined; it no longer refers to person. first this (i.e. this.products) refers to person. but scope/binding has changed.
+
+INSTEAD: can change function to use =>, like:
+let person = {
+	name: 'Kyle',
+	products: ['Coinme-ATM', 'COinme-Wallet', 'GameCoin'],
+	showProducts: function() {
+		
+		this.products.forEach(product) => {
+			console.log(`${this.name} sells ${product}`)
+		});
+	}
+}
+
+
