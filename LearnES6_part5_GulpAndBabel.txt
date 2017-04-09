@@ -1,0 +1,36 @@
+// Goal: browser compatibility for ES6 features
+// if you want to use ES6 and have compatibility on all browsers, need to compile ES6 for ES5. Can use Gulp and Babel
+
+// Babel is transpiler to transfer code from ES6 to ES5
+
+npm install --save-dev gulp gulp-babel babel-preset-es2015
+
+//write gulp script in gulpfile.js:
+const gulp = require('gulp');
+const babel = require('gulp-bable');
+
+gulp.task('es6', () => {
+	return gulp.src('src/app.js')
+		.pipe(babel({
+			presets: ['es2015']
+		}))
+		.pipe(gulp.dest('build'));
+});
+
+gulp.task('default', () => {
+	gulp.watch('src/app.js', ['es6'])
+});
+
+
+gulp will watch for changes in the particular file specified, and rerun on changes
+
+i.e. app.js could have:
+
+let sum = (...numbers) => {
+	return numbers.reduce((prev, curr) => {
+		return prev + curr;
+	});
+};
+
+
+
